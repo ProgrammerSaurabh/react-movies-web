@@ -1,0 +1,20 @@
+.movie__price{
+    min-width: 100px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    cursor: pointer;
+    text-transform: capitalize;
+    user-select: none;
+    display: inline-block;
+}
+
+.movie__price:hover,
+.movie__price_active{
+    background-color: #0D6EFD;
+    color: white;
+}
+
+.movie__price:not(:last-child){
+    margin-right: 5px;
+}
