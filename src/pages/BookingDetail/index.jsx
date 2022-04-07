@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Col, Row, Image, Container, Card } from "react-bootstrap";
+import {
+  Col,
+  Row,
+  Image as BImage,
+  Container,
+  Card,
+  Button,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Back from "../../components/Back";
@@ -24,6 +31,27 @@ function BookingDetail() {
     }
   }, [bookingId]);
 
+  const downloadQrCode = () => {
+    const svg = document.querySelector("svg");
+    if (booking && svg) {
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        const pngFile = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.download = `${booking?.movie?.title}-Movie-QRCode`;
+        downloadLink.href = `${pngFile}`;
+        downloadLink.click();
+      };
+      img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+    }
+  };
+
   return (
     <Container className="my-4">
       <Back to={"/"}>Back to home</Back>
@@ -36,7 +64,7 @@ function BookingDetail() {
           <Card.Body className="shadow">
             <Row>
               <Col xs={1} md={3}>
-                <Image src={booking?.movie.image} thumbnail />
+                <BImage src={booking?.movie.image} thumbnail />
               </Col>
               <Col xs={1} md={9}>
                 <h3 className="h3">{booking?.movie?.title}</h3>
@@ -76,9 +104,20 @@ function BookingDetail() {
                     )
                   </span>
                 </p>
-                <QRCode
-                  value={`${window.location.origin}/bookings/${booking.id}`}
-                />
+                <div className="d-inline-flex justify-content-start flex-column">
+                  <QRCode
+                    value={`${window.location.origin}/bookings/${booking.id}`}
+                  />
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    size="small"
+                    className="my-2"
+                    onClick={() => downloadQrCode()}
+                  >
+                    Download QRCode
+                  </Button>
+                </div>
               </Col>
             </Row>
           </Card.Body>

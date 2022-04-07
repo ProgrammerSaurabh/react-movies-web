@@ -221,5 +221,13 @@
       "prices": 499
     }
   ],
-  "transactions": []
+  "transactions": [
+    {
+      "movieId": "3",
+      "price": 300,
+      "users": 1,
+      "total": 300,
+      "id": 1
+    }
+  ]
 }
