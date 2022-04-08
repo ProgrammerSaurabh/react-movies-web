@@ -12,10 +12,13 @@ export const bookingReducer = (state = INITIAL_BOOKINGS, { type, payload }) => {
     case types.BOOKING_LOADING:
       return { ...state, loading: true };
 
+    case types.STORE_BOOKING_SUCCESS:
+      return { ...state, loading: false };
+
     case types.LOAD_BOOKING_SUCCESS:
       return { ...state, loading: false, booking: payload, error: null };
 
-    case types.STORE_BOOKING_SUCCESS:
+    case types.STORE_BOOKING_ERROR:
     case types.LOAD_BOOKING_ERROR:
       return { ...state, loading: false, error: payload };
 

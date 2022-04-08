@@ -10,14 +10,14 @@ export function* storeBooking({ payload }) {
       payload.data
     );
 
-    yield put({ type: types.LOAD_BOOKING_SUCCESS });
+    yield put({ type: types.STORE_BOOKING_SUCCESS });
 
     if (payload.onSuccess && typeof payload.onSuccess === "function") {
       payload.onSuccess(data.id);
     }
   } catch (error) {
     toast.error("Error");
-    yield put({ type: types.LOAD_BOOKING_ERROR, payload: error });
+    yield put({ type: types.STORE_BOOKING_ERROR, payload: error });
   }
 }
 
