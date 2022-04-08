@@ -14,6 +14,8 @@ import Loader from "../../components/Loader";
 import { loadBooking, loading } from "../../store/actions/bookings.actions";
 import QRCode from "react-qr-code";
 
+import moment from "moment";
+
 function BookingDetail() {
   const { booking: bookingId } = useParams();
   const dispatch = useDispatch();
@@ -76,9 +78,12 @@ function BookingDetail() {
                     <em>Director:</em> <span>{booking?.movie?.director}</span>
                   </p>
                 )}
-                {booking?.movie?.date && (
+                {booking?.date && (
                   <p className="mb-0">
-                    <em>Date:</em> <span>{booking?.movie?.date}</span>
+                    <em>Date:</em>{" "}
+                    <span>
+                      {moment(booking?.date).format("ddd, Do MMMM, YYYY")}
+                    </span>
                   </p>
                 )}
                 <p className="mb-2">

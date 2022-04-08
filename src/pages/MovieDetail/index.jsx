@@ -21,6 +21,7 @@ import {
 
 import styles from "./MovieDetail.module.css";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 function MovieDetail() {
   const { movie: movieId } = useParams();
@@ -35,6 +36,7 @@ function MovieDetail() {
   } = useSelector((state) => state.movies);
   const { loading: bookingLoading_ } = useSelector((state) => state.bookings);
 
+  const [date, setDate] = useState("");
   const [price, setPrice] = useState(0);
   const [users, setUsers] = useState(1);
 
@@ -47,11 +49,24 @@ function MovieDetail() {
 
   const price_ = typeof movie?.prices !== "object" ? movie?.prices : 0;
 
+  const date_ =
+    movie?.type == "event"
+      ? moment(movie?.date, "DD MMMM YYYY").format("YYYY-MM-DD")
+      : moment
+          .max(moment(), moment(movie?.release_date, "DD MMMM YYYY"))
+          .format("YYYY-MM-DD");
+
   useEffect(() => {
     if (price_ > 0) {
       setPrice(price_);
     }
   }, [price_]);
+
+  useEffect(() => {
+    if (date_) {
+      setDate(date_);
+    }
+  }, [date_]);
 
   const bookingHandler = () => {
     if (price === 0) {
@@ -62,10 +77,18 @@ function MovieDetail() {
       return toast.error("Please select atleast one person");
     }
 
+    if (date.length === 0) {
+      return toast.error("Please select date");
+    }
+
+    if (moment(date).isBefore(date_)) {
+      return toast.error("Please select a valid date");
+    }
+
     dispatch(bookingLoading());
     dispatch(
       storeBooking({
-        data: { movieId, price, users, total: price * users },
+        data: { movieId, price, users, date, total: price * users },
         onSuccess: (id) => {
           toast.success("Booking added successfully");
           navigate(`/bookings/${id}`);
@@ -103,6 +126,21 @@ function MovieDetail() {
                     <em>Date:</em> <span>{movie.date}</span>
                   </p>
                 )}
+                {movie.duration && (
+                  <p className="mb-0">
+                    <em>Duration:</em> <span>{movie.duration}</span>
+                  </p>
+                )}
+                {movie.release_date && (
+                  <p className="mb-0">
+                    <em>Release date:</em> <span>{movie.release_date}</span>
+                  </p>
+                )}
+                {movie.ratings && (
+                  <p className="mb-0">
+                    <em>Ratings:</em> <span>{movie.ratings} / 5</span>
+                  </p>
+                )}
                 <p className="mb-2">
                   <em>Stars:</em> <span>{movie.stars}</span>
                 </p>
@@ -138,6 +176,16 @@ function MovieDetail() {
                   </small>
                 )}
                 <div className="d-flex justify-content-start align-items-center gap-1">
+                  <div className="d-inline-block">
+                    <Form.Control
+                      type="date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      disabled={bookingLoading_ || movie?.type == "event"}
+                      placeholder="Movie date"
+                      min={date_}
+                    />
+                  </div>
                   <div className="d-inline-block">
                     <Form.Control
                       type="number"
