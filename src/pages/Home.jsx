@@ -5,7 +5,7 @@ import SubHeader from "../components/SubHeader";
 
 function Home() {
   return (
-    <Container className="my-2">
+    <Container fluid className="my-2">
       <SubHeader />
       <MovieCarousel />
       <RecommendedMovies />

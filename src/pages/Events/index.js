@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Event from "../components/Event";
-import Loader from "../components/Loader";
-import SubHeader from "../components/SubHeader";
-import { loading, loadMovies } from "../store/actions/movies.actions";
+import Loader from "../../components/Loader";
+import SubHeader from "../../components/SubHeader";
+import { loading, loadMovies } from "../../store/actions/movies.actions";
+
+import styles from "./Events.module.css";
+import Event from "../../components/Event";
 
 function Events() {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ function Events() {
   }, []);
 
   return (
-    <Container className="my-2">
+    <Container fluid className="my-2">
       <SubHeader />
       <div className="my-2">
         <h4 className="h4">
@@ -33,15 +35,13 @@ function Events() {
         ) : error ? (
           <h3 className="h3 py-2 text-center">Error</h3>
         ) : events.filter((movie) => movie.type === "event").length > 0 ? (
-          <Row xs={1} md={4} className="g-4">
+          <div className={styles.flexContainer}>
             {events
               .filter((movie) => movie.type === "event")
               .map((event) => (
-                <Col key={`event-${event.id}`}>
-                  <Event event={event} />
-                </Col>
+                <Event key={`event-${event.id}`} event={event} />
               ))}
-          </Row>
+          </div>
         ) : (
           <h5 className="h5 py-2 text-center">No events</h5>
         )}

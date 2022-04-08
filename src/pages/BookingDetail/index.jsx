@@ -65,10 +65,10 @@ function BookingDetail() {
         booking?.movie && (
           <Card.Body className="shadow">
             <Row>
-              <Col xs={1} md={3}>
+              <Col xs={12} md={12} lg={3}>
                 <BImage src={booking?.movie.image} thumbnail />
               </Col>
-              <Col xs={1} md={9}>
+              <Col xs={12} md={12} lg={9}>
                 <h3 className="h3">{booking?.movie?.title}</h3>
                 <p className="mb-0">
                   <em>Genre:</em> <span>{booking?.movie?.genre}</span>
@@ -109,7 +109,7 @@ function BookingDetail() {
                     )
                   </span>
                 </p>
-                <div className="d-inline-flex justify-content-start flex-column">
+                <div className="d-flex justify-content-center justify-content-lg-start align-items-center align-items-lg-start flex-column">
                   <QRCode
                     value={`${window.location.origin}/bookings/${booking.id}`}
                   />

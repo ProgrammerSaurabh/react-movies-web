@@ -108,10 +108,15 @@ function MovieDetail() {
         movie && (
           <Card.Body className="shadow">
             <Row>
-              <Col xs={1} md={3}>
+              <Col
+                xs={12}
+                md={12}
+                lg={3}
+                className={"text-center mb-4 mb-lg-0"}
+              >
                 <Image src={movie.image} thumbnail />
               </Col>
-              <Col xs={1} md={9}>
+              <Col xs={12} md={12} lg={9}>
                 <h3 className="h3">{movie.title}</h3>
                 <p className="mb-0">
                   <em>Genre:</em> <span>{movie.genre}</span>
@@ -175,7 +180,7 @@ function MovieDetail() {
                     <span className="h5">{movie.prices}</span>
                   </small>
                 )}
-                <div className="d-flex justify-content-start align-items-center gap-1">
+                <div className="d-flex justify-content-start align-items-start align-lg-items-center gap-1">
                   <div className="d-inline-block">
                     <Form.Control
                       type="date"

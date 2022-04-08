@@ -251,5 +251,30 @@
       "prices": 499
     }
   ],
-  "transactions": []
+  "transactions": [
+    {
+      "movieId": "1",
+      "price": 300,
+      "users": 1,
+      "date": "2022-04-08",
+      "total": 300,
+      "id": 1
+    },
+    {
+      "movieId": "2",
+      "price": 600,
+      "users": 1,
+      "date": "2022-04-08",
+      "total": 600,
+      "id": 2
+    },
+    {
+      "movieId": "3",
+      "price": 300,
+      "users": 1,
+      "date": "2022-04-08",
+      "total": 300,
+      "id": 3
+    }
+  ]
 }

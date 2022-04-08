@@ -21,7 +21,7 @@ function RecommendedMovies() {
   }, []);
 
   return (
-    <Container className="my-2">
+    <Container fluid className="my-2">
       <div className="my-2">
         <h4 className="h4">
           Recommended Movies (
