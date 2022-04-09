@@ -35,28 +35,31 @@ function Search() {
       {search.length > 0 ? (
         filteredMovies.length > 0 ? (
           <ul id="search__movies-list" className={styles.search__movies_list}>
-            {filteredMovies.map((list) => (
+            {filteredMovies.map((movie) => (
               <li
-                key={`movie-${list.id}`}
+                key={`movie-${movie.id}`}
                 onClick={() => {
                   setSearch("");
-                  navigate(`/movies/${list.id}`);
+                  navigate(`/movies/${movie.id}`);
                 }}
                 className={
                   "d-flex justify-content-start align-items-start flex-row"
                 }
+                title={`Book ${movie.title}${
+                  movie.type == "event" ? " " + movie?.type : " movie"
+                }`}
               >
                 <div style={{ height: "40px" }} className="pe-1">
                   <Image
-                    src={list.image}
-                    alt={`${list.title} image`}
+                    src={movie.image}
+                    alt={`${movie.title} image`}
                     height={40}
                   />
                 </div>
                 <div>
-                  <p className={styles.search__movieTitle}>{list.title}</p>
+                  <p className={styles.search__movieTitle}>{movie.title}</p>
                   <span className={styles.search__movieGenre}>
-                    {list.genre}
+                    {movie.genre}
                   </span>
                 </div>
               </li>

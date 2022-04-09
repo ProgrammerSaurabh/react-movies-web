@@ -55,13 +55,22 @@
 }
 
 .search__movieTitle {
-  line-height: 1;
+  line-height: 1.1;
   padding: 0;
   margin: 0;
   font-size: 14px;
+  max-width: 20ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .search__movieGenre {
   font-size: 12px;
   color: #6c757d;
+  display: inline-block;
+  max-width: 22ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

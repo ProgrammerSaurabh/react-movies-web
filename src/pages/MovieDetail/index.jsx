@@ -167,7 +167,7 @@ function MovieDetail() {
                         }}
                       >
                         {type}
-                        <span>&nbsp;for {movie.currency}&nbsp;</span>
+                        <span>&nbsp;for {movie.currency}</span>
                         <span className="h5">{movie.prices[type]}</span>
                       </small>
                     ))}
@@ -176,7 +176,7 @@ function MovieDetail() {
                   <small
                     className={`${styles.movie__price} ${styles.movie__price_active} mb-2`}
                   >
-                    <span>{movie.currency}&nbsp;</span>
+                    <span>{movie.currency}</span>
                     <span className="h5">{movie.prices}</span>
                   </small>
                 )}
