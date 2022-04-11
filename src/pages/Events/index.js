@@ -23,7 +23,7 @@ function Events() {
   }, []);
 
   return (
-    <Container fluid className="my-2">
+    <Container className="my-2">
       <SubHeader />
       <div className="my-2">
         <h4 className="h4">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Movie({ movie = {} }) {
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <Card.Img variant="top" src={movie.image} />
       <Card.Body>
         <Card.Title>{movie.title}</Card.Title>
